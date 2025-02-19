@@ -22,8 +22,11 @@ public class BankService {
      * TODO: implement functionality to increase the user's balance by amount.
      * @param amount the amount to be deposited.
      */
-    public void deposit(double amount){
-
+    public void deposit(double amount){ 
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be positive.");
+        }
+        this.balance += amount;
     }
 
     /**
@@ -32,7 +35,14 @@ public class BankService {
      * @param amount the amount to be withdrawn.
      */
     public void withdraw(double amount){
-
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdrawal amount must be positive.");
+        }
+        if (this.balance < amount) {
+          
+            return;
+        }
+        this.balance -= amount;
     }
 
     /**
@@ -40,6 +50,6 @@ public class BankService {
      * @return the user's balance.
      */
     public double getBalance(){
-        return 0;
+        return this.balance;
     }
 }
